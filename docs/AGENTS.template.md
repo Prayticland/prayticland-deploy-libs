@@ -1,4 +1,4 @@
-# AGENTS.md — <App name>
+# AGENTS.md—<App name>
 
 Agent-facing operating notes for THIS app only. Fleet-wide rules live in the
 prayticland-templates repo and the fleet plan; do not restate them here.

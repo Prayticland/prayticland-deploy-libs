@@ -1,14 +1,14 @@
-# AGENTS.md — prayticland-deploy-libs
+# AGENTS.md—prayticland-deploy-libs
 
-This repository is public. Everything in it — files, code comments,
-commit messages, pull requests, issues — is written for a public
+This repository is public. Everything in it—files, code comments,
+commit messages, pull requests, issues—is written for a public
 audience.
 
 ## No decision references
 
 - Never reference internal decisions in this repository: no decision
   numbers, no decision titles, no citations of internal documents or
-  their sections, no dated ruling notes — in files, in code comments,
+  their sections, no dated ruling notes—in files, in code comments,
   in commit messages, anywhere.
 - Decisions are not stored in this repository. Decision records are
   kept locally by the maintainers and are gitignored (see `.gitignore`).
