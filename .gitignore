@@ -1,0 +1,9 @@
+# Decision records are kept locally by the maintainers and never
+# enter this repository.
+decisions/
+*.local.md
+
+# Telegram Serverless CLI credentials (never committed).
+.tgcloud/
+
+__pycache__/

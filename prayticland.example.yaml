@@ -1,0 +1,8 @@
+# prayticland.yaml — this app's Prayticland configuration .
+# Lives in the APP REPO ROOT; read by prayticland-deploy-libs. It carries
+# the app's identity only. Deployment VALUES (health URLs, ports, bucket
+# names, origins, secrets) are never stored here or anywhere in the repo:
+# dev values live in the host config dir's deploy.env; prod configuration
+# lives with the Telegram Serverless deployment.
+app: <slug>
+route: /<route>

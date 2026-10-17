@@ -1,0 +1,55 @@
+# <App name> — Prayticland deploy contract.
+# All deploy mechanics live in prayticland-deploy-libs, vendored into this
+# repo as the deploy-libs/ module; this file only sets per-app
+# values. Do not copy deploy logic into this file — fix it in the library.
+SHELL := /bin/bash
+.SHELLFLAGS := -eu -o pipefail -c
+.DEFAULT_GOAL := help
+
+DEPLOY_LIBS ?= $(CURDIR)/deploy-libs
+DEPLOY := $(DEPLOY_LIBS)/deploy.sh
+
+export APP := <slug>                      # compose project + image repository
+export SERVICE := <primary-service>       # compose service verified after deploy
+export APP_CONFIG_DIR := $(HOME)/.config/<slug>
+# Deployment values (health URLs, ports, origins) are NOT stored in the
+# repo: they live in the app's host config dir as
+# deploy.env and are included here; deploy.sh preflight fails closed,
+# naming any missing value.
+-include $(APP_CONFIG_DIR)/deploy.env
+export LOOPBACK_HEALTH_URL
+export PUBLIC_HEALTH_URL
+# export APP_ENV_PREFIX := <LEGACY_PREFIX>  # only while compose uses legacy var names
+# export ENV_FILE := none                   # only for apps without a runtime.env
+
+.PHONY: help check preflight image deploy activate status standards
+help:
+	@printf '%s\n' \
+		'make check     Fast local gates (typecheck, unit tests, lint)' \
+		'make preflight Verify config dir, env file, compose config' \
+		'make image     Build the image (immutable tag, OCI labels)' \
+		'make deploy    preflight -> image -> activate -> health checks' \
+		'make status    Running container, labels, loopback + public health' \
+		'make standards Standards checks, report-only'
+
+check:
+	# per-app: typecheck + unit tests + lint, no network, no Docker
+	@echo 'TODO: wire the app test suite here'
+
+preflight:
+	@$(DEPLOY) preflight
+
+image: preflight
+	@$(DEPLOY) image
+
+deploy:
+	@$(DEPLOY) deploy
+
+activate:
+	@$(DEPLOY) activate
+
+status:
+	@$(DEPLOY) status
+
+standards:
+	@python3 $(TEMPLATES)/standards-check.py --repo . --report-only
